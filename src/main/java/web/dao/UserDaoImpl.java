@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-@Repository
+
 public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
@@ -33,11 +33,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUser(Long id, User user) {
-        User updatedUser = entityManager.find(User.class, id);
-        updatedUser.setName(user.getName());
-        updatedUser.setSurname(user.getSurname());
-        updatedUser.setAge(user.getAge());
-        updatedUser.setEmail(user.getEmail());
+        entityManager.merge(user);
     }
 
     @Override
